@@ -1,16 +1,16 @@
-import { compose, tryCatch } from "ramda";
-import { querySchema, pathSchema, bodySchema } from "./yup/validation";
-import dummyFunction from "./dummy/dummy-function";
-import exampleHandler from "./handler";
-import config from "../../config/config";
+import { compose } from 'ramda';
 
-const injectToContext = (handler) => (event, context) => {
+import dummyFunction from './dummy/dummy-function';
+import exampleHandler from './handler';
+import { bodySchema, pathSchema, querySchema } from './yup/validation';
+
+const injectToContext = handler => (event, context) => {
   return handler(event, { ...context, dummyFunction });
 };
 
-const yupValidation = (handler) => async (event, context) => {
+const yupValidation = handler => async (event, context) => {
   // Validate de data with yup
-  const { pathParameters, queryStringParameters, body } = event;
+  const { body, pathParameters, queryStringParameters } = event;
   const payload = JSON.parse(body);
 
   try {
@@ -26,12 +26,9 @@ const yupValidation = (handler) => async (event, context) => {
 
 /**
  * Builds an AWS λ handler function from the given `config` and injects required dependencies into its context.
- *
  * @param {object} config A configuration object.
  * @returns {Function} An AWS λ handler functions.
  */
-const httpCreateEventHandler = (config) => {
-  return compose(injectToContext, yupValidation)(exampleHandler);
-};
+const httpCreateEventHandler = compose(injectToContext, yupValidation)(exampleHandler);
 
-export default httpCreateEventHandler(config);
+export default httpCreateEventHandler;

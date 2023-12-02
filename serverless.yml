@@ -1,35 +1,34 @@
 service: lambda-typescript-template
+frameworkVersion: '3'
+
+package:
+  individually: true
+  patterns:
+    - '!node_modules/**'
+
 provider:
   name: aws
-  runtime: nodejs16.x
-  stage: ${opt:stage, 'dev'}
-  profile: aws-lambda-dev
-  environment:
-    APP_VERSION: ${file(./package.json):version}
-  # httpApi:
-  #   cors: true
-  # iamRoleStatements:
-  #   - Effect: "Allow"
-  #     Action:
-  #       - "dynamodb:GetItem"
-  #     Resource:
-  #       Fn::GetAtt:
-  #         - UserTable
-  #         - Arn
+  runtime: nodejs18.x
+  region: us-west-2
+  stackName: production-members-service
+  deploymentBucket: serverless-members
+  versionFunctions: false
+
 functions:
   - ${file(./src/functions/example-post/function.yml)}
   - ${file(./src/functions/example-get/function.yml)}
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    noPrependStageInUrl: true
+    printOutput: true
+  esbuild:
+    bundle: true
+    platform: 'node'
+    minify: true
+    sourcemap: false
+
 plugins:
   - serverless-esbuild
   - serverless-offline
-custom:
-  esbuild:
-    bundle: true
-    minify: false
-    sourcemap: true
-  serverless-offline:
-    httpPort: 6000
-    # websocketPort: 6000
-    # lambdaPort: 6000
-resources:
-  Resources: ${file(./serverless.resources.yml)}

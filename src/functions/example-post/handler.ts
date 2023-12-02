@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 const exampleHandler = async (event, context) => {
   try {
     const { dummyFunction } = context;
@@ -6,17 +7,17 @@ const exampleHandler = async (event, context) => {
     const dummyMessage = await dummyFunction();
     return {
       statusCode: 200,
-      body: JSON.stringify({ ...bodyObject, dummyMessage }),
+      body: JSON.stringify({ ...bodyObject, dummyMessage })
     };
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
     return {
       statusCode: 500,
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify({ error: "Internal Server Error" }),
+      body: JSON.stringify({ error: 'Internal Server Error' })
     };
   }
 };

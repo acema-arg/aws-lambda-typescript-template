@@ -1,44 +1,44 @@
-import eventHandler from "./handler";
+import eventHandler from './handler';
 
 const event = {
-  body: JSON.stringify({ message: "test" }),
+  body: JSON.stringify({ message: 'test' }),
   headers: {},
   multiValueHeaders: {},
-  httpMethod: "",
-  path: "",
+  httpMethod: '',
+  path: '',
   pathParameters: {},
   isBase64Encoded: false,
   queryStringParameters: {},
   multiValueQueryStringParameters: {},
   stageVariables: {},
-  resource: "",
+  resource: ''
 };
 
 const context = {
-  dummyFunction: jest.fn().mockReturnValue("hello"),
+  dummyFunction: jest.fn().mockReturnValue('hello')
 };
-describe("Event Handler Tests", () => {
-  test("should test `handleHelloEvent` successfully", async () => {
+describe('Event Handler Tests', () => {
+  test('should test `handleHelloEvent` successfully', async () => {
     const result = await eventHandler(event, context);
     expect(JSON.parse(result.body)).toEqual({
-      dummyMessage: "hello",
-      message: "test",
+      dummyMessage: 'hello',
+      message: 'test'
     });
   });
-  test("should handle errors in `exampleHandler`", async () => {
+  test('should handle errors in `exampleHandler`', async () => {
     const mockContext = {
       dummyFunction: async () => {
-        throw new Error("Simulated error from dummyFunction");
-      },
+        throw new Error('Simulated error from dummyFunction');
+      }
     };
 
     const mockEvent = {
-      body: '{"key": "value"}',
+      body: '{"key": "value"}'
     };
 
     const result = await eventHandler(mockEvent, mockContext);
 
     expect(result.statusCode).toBe(500);
-    expect(JSON.parse(result.body)).toEqual({ error: "Internal Server Error" });
+    expect(JSON.parse(result.body)).toEqual({ error: 'Internal Server Error' });
   });
 });
