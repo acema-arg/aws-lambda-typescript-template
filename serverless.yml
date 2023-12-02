@@ -10,8 +10,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-west-2
-  stackName: production-members-service
-  deploymentBucket: serverless-members
+  stackName: template-service # update to the service name
+  deploymentBucket: acema-serverless
   versionFunctions: false
 
 functions:
@@ -20,14 +20,14 @@ functions:
 
 custom:
   serverless-offline:
-    httpPort: 4000
+    httpPort: 4000 # update to the service port
     noPrependStageInUrl: true
-    printOutput: true
+    # printOutput: true
   esbuild:
     bundle: true
     platform: 'node'
-    minify: true
-    sourcemap: false
+    minify: true # @NOTE: set to 'false' for development
+    sourcemap: false # @NOTE: set to 'true' for development
 
 plugins:
   - serverless-esbuild
