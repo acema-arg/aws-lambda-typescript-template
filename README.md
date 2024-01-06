@@ -4,7 +4,7 @@ Boilerplate repository for AWS lambda functions.
 
 ## Structure
 
-Service structure (mandatory)
+Service structure (recommended)
 
 ### Functions
 
