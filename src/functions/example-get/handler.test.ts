@@ -5,8 +5,8 @@ const event = {
   headers: {},
   multiValueHeaders: {},
   httpMethod: '',
-  path: '/hello',
-  pathParameters: { greeting: 'hello' },
+  path: '/greeting',
+  pathParameters: { greeting: 'hello-from-lambda' },
   isBase64Encoded: false,
   queryStringParameters: {},
   multiValueQueryStringParameters: {},
@@ -15,16 +15,14 @@ const event = {
 };
 
 const context = {
-  dummyFunction: jest.fn().mockReturnValue('hello')
+  exampleFn: jest.fn().mockReturnValue('hello')
 };
-describe('Event Handler Tests', () => {
-  test('should test `handleHelloEvent` successfully', async () => {
+describe('`eventHandler` function', () => {
+  test('should test `exampleFn` successfully', async () => {
     const result = await eventHandler(event, context);
     expect(JSON.parse(result.body)).toEqual({
-      dummyMessageFromFunction: 'hello',
-      pathParameters: {
-        greeting: 'hello'
-      },
+      greeting: 'hello',
+      pathParameters: { greeting: 'hello-from-lambda' },
       queryStringParameters: {}
     });
   });
@@ -40,7 +38,7 @@ describe('Event Handler Tests', () => {
     };
 
     await eventHandler(mockEvent, mockContext).catch(error =>
-      expect(error.message).toEqual('Ups some mistake')
+      expect(error.message).toEqual('Ups, some mistake')
     );
   });
 });

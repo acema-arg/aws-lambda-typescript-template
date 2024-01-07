@@ -3,5 +3,5 @@ example-post:
   description: Greetings from lambda
   events:
     - http:
-        path: /
+        path: /greeting
         method: POST

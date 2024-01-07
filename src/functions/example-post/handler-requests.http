@@ -1,6 +1,6 @@
 ### Greetings from lambda
-POST http://localhost:4000
+POST http://localhost:4000/greeting
 Content-Type: application/json
 {
-	"message": "Hello from Lambda!"
+  "meesage": "Hola"
 }

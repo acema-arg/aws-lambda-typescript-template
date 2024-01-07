@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import HEADERS from '@core/constants/http-headers';
-import HTTP_STATUS_CODES from '@core/constants/http-status-codes';
+import { HEADERS, HTTP_STATUS_CODES } from '@shared/definitions/constants';
 import { lambdaCreateErrorResponse } from './lambda-create-error-response';
 
 // Mocks for testing

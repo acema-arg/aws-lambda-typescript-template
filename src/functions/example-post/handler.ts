@@ -1,11 +1,11 @@
 const exampleHandler = async (event, context) => {
-  const { config, greeting } = context;
-  const { body } = event;
-  const bodyObject = JSON.parse(body);
-  const dummyMessage = await greeting();
+  const body = JSON.parse(event.body);
+  const { config, exampleFn } = context;
+
+  const greeting = await exampleFn();
   return {
     statusCode: 200,
-    body: JSON.stringify({ dummyMessage, body: bodyObject, config })
+    body: JSON.stringify({ greeting, body, config })
   };
 };
 

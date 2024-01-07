@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-const HTTP_STATUS_CODES = Object.freeze({
+export const HEADERS = Object.freeze({
+  CONTENT_TYPE: { KEY: 'Content-Type', APP_JSON: 'application/json' },
+  ACCESS_CONTROL: {
+    KEY: 'Access-Control-Allow-Origin',
+    ALL: '*'
+  }
+});
+
+export const HTTP_STATUS_CODES = Object.freeze({
   OK: 200,
   CREATED: 201,
   ACCEPTED: 202,
@@ -11,5 +19,3 @@ const HTTP_STATUS_CODES = Object.freeze({
   METHOD_NOT_ALLOWED: 405,
   INTERNAL_SERVER_ERROR: 500
 });
-
-export default HTTP_STATUS_CODES;

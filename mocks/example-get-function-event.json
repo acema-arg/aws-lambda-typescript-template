@@ -1,9 +1,0 @@
-{
-  "pathParameters": {
-    "greeting": "Hi"
-  },
-  "queryParameters": {
-    "other": "Some"
-  },
-  "headers": {}
-}

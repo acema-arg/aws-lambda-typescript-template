@@ -6,7 +6,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
-    "start": "sls offline --stage dev",
+    "start": "sls offline --stage development",
     "test": "jest --env=node --colors --bail --detectOpenHandles --errorOnDeprecated --passWithNoTests src/"
   },
   "dependencies": {

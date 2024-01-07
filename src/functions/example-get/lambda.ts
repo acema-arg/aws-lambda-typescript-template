@@ -1,9 +1,9 @@
 import { compose } from 'ramda';
-import { config } from '@config/config';
 import { lambdaFunctionContextInjector, lambdaTryCatch, lambdaYupValidation } from '@core/lambda';
-import dummyFunction from './dummy/dummy-function';
+import exampleFn from './example-function';
 import exampleHandler from './handler';
-import { bodySchema, pathSchema, querySchema } from './yup/validation';
+import { bodySchema, pathSchema, querySchema } from './schema';
+import { config } from '../../config';
 
 /**
  * Builds an AWS λ handler function from the given `config` and injects required dependencies into its context.
@@ -11,11 +11,9 @@ import { bodySchema, pathSchema, querySchema } from './yup/validation';
  * @returns {Function} An AWS λ handler functions.
  */
 const httpCreateEventHandler = config => {
-  // eg. function config should be made here before inject functions
-  console.log('just an example', config);
   return compose(
     lambdaTryCatch,
-    lambdaFunctionContextInjector({ dummyFunction: dummyFunction }),
+    lambdaFunctionContextInjector({ exampleFn, config }),
     lambdaYupValidation({ bodySchema, pathSchema, querySchema })
   )(exampleHandler);
 };

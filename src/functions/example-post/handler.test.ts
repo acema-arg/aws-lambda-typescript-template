@@ -15,21 +15,21 @@ const event = {
 };
 
 const context = {
-  greeting: jest.fn().mockReturnValue('hello')
+  exampleFn: jest.fn().mockReturnValue('hello')
 };
-describe('Event Handler Tests', () => {
-  test('should test `handleHelloEvent` successfully', async () => {
+describe('`eventHandler` function', () => {
+  test('should test `exampleFunction` successfully', async () => {
     const result = await eventHandler(event, context);
     expect(JSON.parse(result.body)).toEqual({
       body: {
         message: 'test'
       },
-      dummyMessage: 'hello'
+      greeting: 'hello'
     });
   });
   test('should handle errors in `exampleHandler`', async () => {
     const mockContext = {
-      greeting: async () => {
+      exampleFn: async () => {
         throw new Error('Simulated error from dummyFunction');
       }
     };

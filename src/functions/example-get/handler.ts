@@ -1,19 +1,16 @@
 const exampleHandler = async (event, context) => {
   try {
-    const { dummyFunction } = context;
-    console.log('event', event);
+    const { exampleFn } = context;
     const { pathParameters, queryStringParameters } = event;
-    const dummyMessageFromFunction = await dummyFunction();
+    console.log(context);
+    console.log(event);
+    const greeting = await exampleFn();
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        dummyMessageFromFunction,
-        pathParameters,
-        queryStringParameters
-      })
+      body: JSON.stringify({ greeting, pathParameters, queryStringParameters })
     };
   } catch (error) {
-    throw new Error('Ups some mistake');
+    throw new Error('Ups, some mistake');
   }
 };
 
